@@ -1,9 +1,12 @@
 import useSound from 'use-sound';
 import gameOverSound from '../assets/gameover.wav';
+import gameWinSound from '../assets/win.mp3';
 import { useEffect } from 'react';
 
 export default function GameOver(props) {
-  const [play] = useSound(gameOverSound);
+  const [play] = useSound(
+    props.title === 'Game Over 😞' ? gameOverSound : gameWinSound
+  );
 
   useEffect(() => {
     play();
@@ -11,7 +14,7 @@ export default function GameOver(props) {
 
   return (
     <div className="gameoverOverlay">
-      Game Over :(
+      {props.title}
       <button onClick={() => props.restart()} className="control playagain">
         Play Again
       </button>

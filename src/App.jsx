@@ -17,7 +17,7 @@ function App() {
   // number of cards to render
   const [cardCount, setCardCount] = useState(4);
   // score
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(293);
   // get highScore from localStorage**************************
   const [highScore, setHighScore] = useState(
     localStorage.getItem('highscore')
@@ -29,7 +29,7 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   // generates a random number every run
-  const random = uniqueRandom(1, 800);
+  const random = uniqueRandom(1, 500);
   // fetches and converts received data to an array of pokemon
   const getPokemonData = async (from) => {
     try {
@@ -162,10 +162,12 @@ function App() {
       <Header score={score} highScore={highScore} level={level} />
       {isGameOver ? (
         <>
-          <GameOver restart={restartGame} />
+          <GameOver title="Game Over 😞" restart={restartGame} />
 
           <Container pokemonList={pokemonList} scoreSetter={scoreSetter} />
         </>
+      ) : score === 294 ? (
+        <GameOver title="🎉 Congratulations 🥳🎉" restart={restartGame} />
       ) : (
         <Container
           pokemonList={pokemonList}

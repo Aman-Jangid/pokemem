@@ -4,8 +4,6 @@ import Loading from './Loading';
 import { useState } from 'react';
 
 export default function Container(props) {
-  const [clicked, setClicked] = useState(false);
-
   const data = props.pokemonList;
 
   return (
@@ -16,7 +14,6 @@ export default function Container(props) {
         data.map((pokemon, index) => (
           <Card
             id={index}
-            setClicked={setClicked}
             dimension={
               data.length < 13
                 ? { width: '200px', height: '225px' }
