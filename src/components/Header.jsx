@@ -1,8 +1,7 @@
 import ScoreBoard from './ScoreBoard';
 
 export default function Header(props) {
-  const logo =
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png';
+  const logo = 'public/favicon.png';
 
   return (
     <div className="header">
