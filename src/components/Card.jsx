@@ -1,8 +1,15 @@
+import { useRef } from 'react';
+import useSound from 'use-sound';
+import clickSound from '../assets/select.mp3';
+
 export default function Card(props) {
   const { name, image } = props.pokemon;
 
+  const [play] = useSound(clickSound);
+
   const onClickHandle = (e) => {
     props.scoreSetter(e);
+    play();
   };
 
   return (
@@ -10,7 +17,7 @@ export default function Card(props) {
       <div
         className="overlay"
         id={props.id}
-        onClick={(e) => props.scoreSetter(e)}
+        onClick={(e) => onClickHandle(e)}
         style={props.dimension}
       ></div>
       <div className="cardBackground">

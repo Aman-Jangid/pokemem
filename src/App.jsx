@@ -3,9 +3,13 @@ import { useEffect, useState } from 'react';
 import uniqueRandom from 'unique-random';
 import fetchMultiplePokemon from './components/fetch';
 
+import playAgainSound from './assets/error.wav';
+import levelUpSound from './assets/levelUp.mp3';
+
 import Container from './components/Container';
 import Header from './components/Header';
 import GameOver from './components/GameOver';
+import useSound from 'use-sound';
 
 function App() {
   // contains array of pokemon objects with name and image
@@ -23,16 +27,8 @@ function App() {
   const [level, setLevel] = useState(1);
   const [isGameOver, setIsGameOver] = useState(false);
 
-  console.log(
-    'pokemonList ' + pokemonList,
-    'cardCount ' + cardCount,
-    'score ' + score,
-    'highScore ' + highScore,
-    'level ' + level,
-    'isGameOver ' + isGameOver
-  );
   // generates a random number every run
-  const random = uniqueRandom(1, 500);
+  const random = uniqueRandom(1, 800);
   // fetches and converts received data to an array of pokemon
   const getPokemonData = async (from) => {
     const data = await fetchMultiplePokemon(from, cardCount);
@@ -73,8 +69,11 @@ function App() {
     }
   }, [score]);
 
+  const [playLevelUp] = useSound(levelUpSound);
+
   // when all objects in the pokemonList array contain clicked:true property
   const nextStage = () => {
+    playLevelUp();
     setLevel(level + 1);
     setCardCount(cardCount + 1);
   };
@@ -132,9 +131,11 @@ function App() {
     updateObject(i, { ...pokemonList[i], clicked: true });
   };
 
+  const [playRestart] = useSound(playAgainSound);
   // start/restart game
   const restartGame = () => {
-    console.log('restarted');
+    playRestart();
+
     // resetting state
     setCardCount(4);
     setScore(0);
