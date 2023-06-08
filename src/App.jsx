@@ -23,6 +23,14 @@ function App() {
   const [level, setLevel] = useState(1);
   const [isGameOver, setIsGameOver] = useState(false);
 
+  console.log(
+    'pokemonList ' + pokemonList,
+    'cardCount ' + cardCount,
+    'score ' + score,
+    'highScore ' + highScore,
+    'level ' + level,
+    'isGameOver ' + isGameOver
+  );
   // generates a random number every run
   const random = uniqueRandom(1, 500);
   // fetches and converts received data to an array of pokemon
@@ -37,7 +45,6 @@ function App() {
     );
     setPokemonList([...pokeList]);
   };
-
   // returns an array of given length with random non-repeating numbers
   const generateRandomList = (length) => {
     // create an array of numbers from 0 to length
@@ -69,6 +76,7 @@ function App() {
   // when all objects in the pokemonList array contain clicked:true property
   const nextStage = () => {
     setLevel(level + 1);
+    setCardCount(cardCount + 1);
   };
 
   // triggers whenever pokemonList is updated and calls nextStage() when all the cards contain clicked property
@@ -82,18 +90,19 @@ function App() {
   }, [pokemonList]);
 
   useEffect(() => {
-    console.log('level_', level);
-    // if (level !== 1) {
-    setCardCount(cardCount + 1);
+    if (level < 2) {
+      setCardCount(4);
+    }
+
+    // setCardCount(cardCount + 1);
     const from = random();
     getPokemonData(from);
-    // }
   }, [level]);
 
   const updateObject = (i, newValue) => {
     // when an object containing clicked:true is clicked again
     if (pokemonList[i].clicked) {
-      setScore(0);
+      // setScore(0);
       setIsGameOver(true);
       return;
     }
@@ -105,35 +114,45 @@ function App() {
     const randomIndexes = generateRandomList(cardCount);
     const newPokemonArray = [];
 
-    // randomIndexes.forEach((random) => {
-    //   newPokemonArray.push(pokemonList[random]);
-    //   setPokemonList([...newPokemonArray]);
-    // });
-    // console.log(newPokemonArray);
-
-    setPokemonList((prevState) => {
-      const newArr = [...prevState];
-      newArr[i] = newValue;
-      return newArr;
+    pokemonList.forEach((pokemon, index) => {
+      newPokemonArray[randomIndexes[index]] = pokemon;
     });
+
+    newPokemonArray.map((pokemon) => {
+      if (pokemon.name === newValue.name) {
+        pokemon.clicked = true;
+      }
+    });
+    setPokemonList([...newPokemonArray]);
   };
 
   // sets score when clicking on a card
   const scoreSetter = (e) => {
-    // e.target.id = pokemon name
     const i = e.target.id;
     updateObject(i, { ...pokemonList[i], clicked: true });
   };
 
   // start/restart game
-  const startGame = () => {};
+  const restartGame = () => {
+    console.log('restarted');
+    // resetting state
+    setCardCount(4);
+    setScore(0);
+    setHighScore(localStorage.getItem('highscore'));
+    setLevel(1);
+    setIsGameOver(false);
+    // setPokemonList([]);
+
+    const from = random();
+    getPokemonData(from);
+  };
 
   return (
     <div className="App">
-      <Header score={score} highScore={highScore} />
+      <Header score={score} highScore={highScore} level={level} />
       {isGameOver ? (
         <>
-          <GameOver remainingPokemon={pokemonList} />
+          <GameOver restart={restartGame} />
           <Container pokemonList={pokemonList} scoreSetter={scoreSetter} />
         </>
       ) : (

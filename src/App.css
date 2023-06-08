@@ -1,7 +1,9 @@
 :root {
-  --header-height: 45px;
-  --min-card-width: 160px;
-  --max-card-width: 200px;
+  --header-height: 4.5rem;
+  --min-card-width: 16rem;
+  --max-card-width: 20rem;
+
+  font-size: 10px;
 }
 
 .App {
@@ -13,10 +15,10 @@
 
   display: grid;
   grid-template-rows: var(--header-height) calc(100vh - var(--header-height));
+  font-size: 1.4rem;
 }
 
 .container {
-  /* padding: 10px; */
   justify-self: center;
   align-self: center;
 
@@ -25,11 +27,11 @@
   justify-content: center;
   align-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
 
-  min-width: calc(90vw - 10px);
-  min-height: calc(80vh - 10px);
-  border-radius: 5px;
+  min-width: calc(90vw);
+  min-height: calc(80vh);
+  border-radius: 0.5rem;
   background: yellowgreen;
 
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.15);
@@ -42,20 +44,20 @@
   position: absolute;
 
   color: #fff;
-  border-radius: 15px;
+  border-radius: 1.5rem;
   background: rgba(0, 0, 0, 0.35);
 
   top: 53.5%;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  gap: 10px;
+  gap: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
-  font-size: 42px;
+  font-size: 4.2rem;
   font-weight: 500;
 
   z-index: 1000;
@@ -64,7 +66,7 @@
 .card {
   color: #fff;
   background-color: cornflowerblue;
-  border-radius: 10px;
+  border-radius: 1rem;
 
   position: relative;
 
@@ -81,21 +83,21 @@
 
 .card .overlay {
   position: absolute;
-  border-radius: 10px;
+  border-radius: 1rem;
 
   z-index: 100;
 }
 
 .card img {
-  max-width: 160px;
+  max-width: 16rem;
 }
 
 .card label {
   position: absolute;
-  bottom: 6px;
+  bottom: 0.6rem;
   left: 50%;
   padding: 0 5px 1px 5px;
-  border-radius: 6px;
+  border-radius: 0.6rem;
   transform: translateX(-50%);
 
   font-size: 120%;
@@ -132,10 +134,11 @@
 }
 
 .scoreboard {
+  color: #222;
   width: max-content;
   height: 100%;
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 
   justify-content: center;
   align-items: center;
@@ -145,9 +148,9 @@
 .highScore {
   border-radius: 4px;
   background: pink;
-  font-size: 30px;
-  width: 100px;
-  height: calc(var(--header-height) - 10px);
+  font-size: 3rem;
+  width: 10rem;
+  height: calc(var(--header-height) - 1rem);
 
   display: flex;
   align-items: center;
@@ -160,9 +163,9 @@
 }
 
 .scoreboard label {
-  color: #111;
+  color: #333;
   background: yellowgreen;
-  border-radius: 20px;
+  border-radius: 2rem;
   padding: 3px 5px;
   width: max-content;
   position: absolute;
@@ -183,79 +186,45 @@
   border-bottom-left-radius: 0;
 }
 
-.control {
-  height: 70%;
-  width: 65%;
-  font-size: 110%;
-
-  color: #111;
-
+.level {
+  color: #444;
   background: yellowgreen;
 
-  border: none;
-  align-self: center;
+  height: 70%;
+  width: max-content;
+  font-size: 110%;
+  padding: 0 4px;
   border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  align-self: center;
   transition: all 0.3s;
 }
 
-.control.playagain {
-  width: max-content;
-  height: 50px;
-  font-size: 26px;
+.level span {
+  color: #fff;
+  background: hotpink;
+  font-size: 120%;
+  font-weight: 500;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 0 5px;
 }
 
-.control:hover {
+.playagain {
+  width: max-content;
+  height: 5rem;
+  font-size: 2.6rem;
+
+  border: none;
+  background: yellowgreen;
+  border-radius: 5px;
+}
+
+.playagain:hover {
   background: rgb(100, 135, 30);
   color: #fff;
 }
-/* 
-@media (max-width: 768px) {
-  :root {
-    --header-height: 30px;
-    --min-card-width: 120px;
-    --max-card-width: 160px;
-  }
-
-  .container {
-    min-width: calc(90vw - 10px);
-    min-height: calc(80vh - 10px);
-  }
-
-  .card {
-    flex-grow: 1;
-    flex-shrink: 1;
-  }
-
-  .card img {
-    max-width: 120px;
-  }
-
-  .header {
-    height: var(--header-height);
-  }
-
-  .logo {
-    font-size: 100%;
-  }
-
-  .scoreboard {
-    gap: 5px;
-  }
-
-  .currentScore,
-  .highScore {
-    font-size: 20px;
-    width: 80px;
-    height: calc(var(--header-height) - 6px);
-  }
-
-  .scoreboard label {
-    font-size: 90%;
-  }
-
-  .control {
-    height: 60%;
-    width: 55%;
-    font-size: 100%;
-  }
-} */

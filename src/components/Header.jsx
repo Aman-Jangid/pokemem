@@ -1,7 +1,7 @@
 import ScoreBoard from './ScoreBoard';
 
 export default function Header(props) {
-  const logo = 'public/favicon.png';
+  const logo = '/favicon.png';
 
   return (
     <div className="header">
@@ -9,7 +9,9 @@ export default function Header(props) {
         PokéMem <img src={logo} width={'35px'} />
       </div>
       <ScoreBoard score={props} />
-      <button className="control">Start</button>
+      <div className="level">
+        level <span>{props.level}</span>
+      </div>
     </div>
   );
 }
