@@ -1,5 +1,6 @@
 import uniqid from 'uniqid';
 import Card from './Card';
+import Loading from './Loading';
 import { useState } from 'react';
 
 export default function Container(props) {
@@ -9,24 +10,28 @@ export default function Container(props) {
 
   return (
     <div className="container">
-      {data.map((pokemon, index) => (
-        <Card
-          id={index}
-          setClicked={setClicked}
-          dimension={
-            data.length < 13
-              ? { width: '200px', height: '225px' }
-              : data.length > 14 && data.length < 16
-              ? { width: '145px', height: '160px' }
-              : data.length > 15
-              ? { width: '145px', height: '155px' }
-              : { width: '170px', height: '195px' }
-          }
-          scoreSetter={props.scoreSetter}
-          pokemon={pokemon}
-          key={uniqid()}
-        />
-      ))}
+      {props.loading ? (
+        <Loading />
+      ) : (
+        data.map((pokemon, index) => (
+          <Card
+            id={index}
+            setClicked={setClicked}
+            dimension={
+              data.length < 13
+                ? { width: '200px', height: '225px' }
+                : data.length > 14 && data.length < 16
+                ? { width: '145px', height: '160px' }
+                : data.length > 15
+                ? { width: '145px', height: '155px' }
+                : { width: '170px', height: '195px' }
+            }
+            scoreSetter={props.scoreSetter}
+            pokemon={pokemon}
+            key={uniqid()}
+          />
+        ))
+      )}
     </div>
   );
 }

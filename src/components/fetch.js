@@ -7,7 +7,8 @@ async function fetchPokemon(id) {
   return data;
 }
 
-export default async function fetchMultiplePokemon(from, length) {
+export default async function fetchMultiplePokemon(setLoading, from, length) {
+  setLoading(true);
   const IDs = Array.from({ length }, (_, i) => i + from);
   const promises = IDs.map((id) => fetchPokemon(id));
 

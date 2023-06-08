@@ -27,19 +27,28 @@ function App() {
   const [level, setLevel] = useState(1);
   const [isGameOver, setIsGameOver] = useState(false);
 
+  const [loading, setLoading] = useState(true);
   // generates a random number every run
   const random = uniqueRandom(1, 800);
   // fetches and converts received data to an array of pokemon
   const getPokemonData = async (from) => {
-    const data = await fetchMultiplePokemon(from, cardCount);
-    const pokeList = [];
-    data.map((pokemon) =>
-      pokeList.push({
-        name: pokemon.name,
-        image: pokemon.sprites.other['official-artwork'].front_default,
-      })
-    );
-    setPokemonList([...pokeList]);
+    try {
+      const data = await fetchMultiplePokemon(setLoading, from, cardCount);
+      const pokeList = [];
+      data.map((pokemon) =>
+        pokeList.push({
+          name: pokemon.name,
+          image: pokemon.sprites.other['official-artwork'].front_default,
+        })
+      );
+      setPokemonList([...pokeList]);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 600);
+    }
   };
   // returns an array of given length with random non-repeating numbers
   const generateRandomList = (length) => {
@@ -154,10 +163,15 @@ function App() {
       {isGameOver ? (
         <>
           <GameOver restart={restartGame} />
+
           <Container pokemonList={pokemonList} scoreSetter={scoreSetter} />
         </>
       ) : (
-        <Container pokemonList={pokemonList} scoreSetter={scoreSetter} />
+        <Container
+          pokemonList={pokemonList}
+          scoreSetter={scoreSetter}
+          loading={loading}
+        />
       )}
     </div>
   );

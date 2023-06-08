@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import useSound from 'use-sound';
 import clickSound from '../assets/select.mp3';
 
