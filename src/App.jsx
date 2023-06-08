@@ -20,28 +20,42 @@ function App() {
       ? localStorage.getItem('highscore')
       : score
   );
-
   const [level, setLevel] = useState(1);
   const [isGameOver, setIsGameOver] = useState(false);
 
-  useEffect(() => {
-    // generates a random number every run
-    const random = uniqueRandom(1, 500);
-    const from = random();
-    // fetches and converts received data to an array of pokemon
-    const getPokemonData = async () => {
-      const data = await fetchMultiplePokemon(from, cardCount);
-      const pokeList = [];
-      data.map((pokemon) =>
-        pokeList.push({
-          name: pokemon.name,
-          image: pokemon.sprites.other['official-artwork'].front_default,
-        })
-      );
-      setPokemonList([...pokeList]);
-    };
+  // generates a random number every run
+  const random = uniqueRandom(1, 500);
+  // fetches and converts received data to an array of pokemon
+  const getPokemonData = async (from) => {
+    const data = await fetchMultiplePokemon(from, cardCount);
+    const pokeList = [];
+    data.map((pokemon) =>
+      pokeList.push({
+        name: pokemon.name,
+        image: pokemon.sprites.other['official-artwork'].front_default,
+      })
+    );
+    setPokemonList([...pokeList]);
+  };
 
-    getPokemonData();
+  // returns an array of given length with random non-repeating numbers
+  const generateRandomList = (length) => {
+    // create an array of numbers from 0 to length
+    const numbers = Array.from({ length: length }, (_, index) => index);
+    const result = [];
+
+    while (numbers.length > 0) {
+      const randomIndex = Math.floor(Math.random() * numbers.length);
+      const randomNumber = numbers.splice(randomIndex, 1)[0];
+      result.push(randomNumber);
+    }
+    return result;
+  };
+
+  // 1.fetches random pokemon when component mounts
+  useEffect(() => {
+    const from = random();
+    getPokemonData(from);
   }, []);
 
   // get and set highscore in localstorage and state
@@ -52,7 +66,12 @@ function App() {
     }
   }, [score]);
 
-  // triggers whenever pokemonList is updated
+  // when all objects in the pokemonList array contain clicked:true property
+  const nextStage = () => {
+    setLevel(level + 1);
+  };
+
+  // triggers whenever pokemonList is updated and calls nextStage() when all the cards contain clicked property
   useEffect(() => {
     if (pokemonList.length > 0) {
       const clickedAll = pokemonList.every(
@@ -62,18 +81,13 @@ function App() {
     }
   }, [pokemonList]);
 
-  // when all objects in the pokemonList array contain clicked:true property
-  const nextStage = () => {
-    console.log('starting next stage');
-    setLevel(level + 1);
-    // setCardCount
-  };
-
   useEffect(() => {
-    console.log('level__', level);
-    if (level !== 1) {
-      setCardCount(cardCount + level + 1);
-    }
+    console.log('level_', level);
+    // if (level !== 1) {
+    setCardCount(cardCount + 1);
+    const from = random();
+    getPokemonData(from);
+    // }
   }, [level]);
 
   const updateObject = (i, newValue) => {
@@ -84,7 +98,18 @@ function App() {
       return;
     }
 
+    // increment score
     setScore(score + 1);
+
+    // initialize an array of random non-repeating numbers
+    const randomIndexes = generateRandomList(cardCount);
+    const newPokemonArray = [];
+
+    // randomIndexes.forEach((random) => {
+    //   newPokemonArray.push(pokemonList[random]);
+    //   setPokemonList([...newPokemonArray]);
+    // });
+    // console.log(newPokemonArray);
 
     setPokemonList((prevState) => {
       const newArr = [...prevState];
@@ -106,19 +131,15 @@ function App() {
   return (
     <div className="App">
       <Header score={score} highScore={highScore} />
-      {
-        // isGameOver
-        false ? (
-          <>
-            <GameOver />
-            <Container pokemonList={pokemonList} scoreSetter={scoreSetter} />
-          </>
-        ) : (
+      {isGameOver ? (
+        <>
+          <GameOver remainingPokemon={pokemonList} />
           <Container pokemonList={pokemonList} scoreSetter={scoreSetter} />
-        )
-      }
+        </>
+      ) : (
+        <Container pokemonList={pokemonList} scoreSetter={scoreSetter} />
+      )}
     </div>
   );
 }
-
 export default App;

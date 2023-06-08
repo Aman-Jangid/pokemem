@@ -16,7 +16,9 @@ export default function Container(props) {
           dimension={
             data.length < 13
               ? { width: '200px', height: '225px' }
-              : { width: '150px', height: '175px' }
+              : data.length > 14
+              ? { width: '145px', height: '160px' }
+              : { width: '170px', height: '195px' }
           }
           scoreSetter={props.scoreSetter}
           pokemon={pokemon}
