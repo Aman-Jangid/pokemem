@@ -9,8 +9,11 @@
   font-size: 10px;
 }
 
-.App {
+body {
   background: #b6dae2;
+}
+
+.App {
   width: 100vw;
   height: 100vh;
 
@@ -241,9 +244,12 @@
     font-size: 10px;
   }
 
+  body {
+    background-color: #b6dae2;
+  }
+
   .App {
     display: grid;
-
     grid-template-rows: 50px auto;
   }
 
@@ -258,18 +264,27 @@
     font-size: 0.94rem;
     background-color: lightgreen;
     width: 95lvw;
-    height: 70lvh !important;
-    margin-top: 20px;
+    /* height: 70lvh !important; */
+    height: max-content !important;
+    margin-top: 60px;
+
+    justify-items: center;
+    align-content: center;
 
     padding: 5px;
     display: grid;
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(65px, 1fr)
-    ); /* Adjust the column width as needed */
+    grid-template-columns: repeat(auto-fit, minmax(6rem, auto));
     column-gap: 5px;
     row-gap: 12px;
-    max-width: 100%; /* Ensure the grid doesn't exceed the screen width */
+    max-width: 95lvw;
+  }
+
+  .loading {
+    grid-column: 3;
+    grid-row: 3;
+
+    justify-self: center;
+    align-self: center;
   }
 
   .logo {
@@ -288,11 +303,15 @@
   }
 
   .scoreboard {
-    width: 80vw;
+    width: 80%;
     align-self: center;
 
     grid-column: 1/-1;
     grid-row: 2;
+  }
+
+  .scoreboard label {
+    font-size: 0.9rem;
   }
 
   .card {

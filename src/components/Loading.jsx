@@ -1,6 +1,7 @@
 export default function Loading() {
   return (
     <svg
+      className="loading"
       width="57"
       height="57"
       viewBox="0 0 57 57"
