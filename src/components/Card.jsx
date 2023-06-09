@@ -4,10 +4,6 @@ import clickSound from '../assets/select.mp3';
 export default function Card(props) {
   const { name, image } = props.pokemon;
 
-  // const styles = {
-  //   '--card-width': props.dimension.width,
-  //   '--card-height': props.dimension.height,
-  // };
   const [play] = useSound(clickSound);
   const onClickHandle = (e) => {
     props.scoreSetter(e);
@@ -20,7 +16,7 @@ export default function Card(props) {
         className="overlay"
         id={props.id}
         onClick={(e) => onClickHandle(e)}
-        style={props.dimension}
+        style={{ width: '100%', height: '100%' }}
       ></div>
       <div className="cardBackground">
         <img src={image} alt="pokemon" onClick={props.scoreSetter} />

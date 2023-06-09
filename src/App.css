@@ -231,6 +231,7 @@
   background: rgb(100, 135, 30);
   color: #fff;
 }
+
 @media screen and (max-width: 480px) {
   :root {
     --header-height: 4rem;
@@ -240,11 +241,35 @@
     font-size: 10px;
   }
 
+  .App {
+    display: grid;
+
+    grid-template-rows: 50px auto;
+  }
+
   .header {
     height: 50px;
     display: grid;
     grid-template-columns: repeat(2, 50%);
     grid-template-rows: repeat(3, 50px);
+  }
+
+  .container {
+    font-size: 0.94rem;
+    background-color: lightgreen;
+    width: 95lvw;
+    height: 70lvh !important;
+    margin-top: 20px;
+
+    padding: 5px;
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(65px, 1fr)
+    ); /* Adjust the column width as needed */
+    column-gap: 5px;
+    row-gap: 12px;
+    max-width: 100%; /* Ensure the grid doesn't exceed the screen width */
   }
 
   .logo {
@@ -270,16 +295,10 @@
     grid-row: 2;
   }
 
-  .container {
-    background-color: lightgreen;
-    width: 95vw;
-    margin-top: 20px;
-  }
-
   .card {
-    flex: 0 0 auto;
-    width: calc(13rem / var(--card-count) + var(--max-card-width));
-    height: calc(15rem / var(--card-count) + 10rem);
+    width: 100% !important; /* Make the images fill the entire grid cell */
+    height: 110% !important; /* Maintain the aspect ratio of the images */
+    object-fit: cover; /* Crop the images to fit the container without distortion */
   }
 
   .card img {

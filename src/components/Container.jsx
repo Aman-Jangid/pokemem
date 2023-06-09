@@ -1,11 +1,9 @@
 import uniqid from 'uniqid';
 import Card from './Card';
 import Loading from './Loading';
-import { useState } from 'react';
 
 export default function Container(props) {
   const data = props.pokemonList;
-
   return (
     <div className="container">
       {props.loading ? (
