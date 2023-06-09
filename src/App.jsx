@@ -17,7 +17,7 @@ function App() {
   // number of cards to render
   const [cardCount, setCardCount] = useState(4);
   // score
-  const [score, setScore] = useState(293);
+  const [score, setScore] = useState(0);
   // get highScore from localStorage**************************
   const [highScore, setHighScore] = useState(
     localStorage.getItem('highscore')
