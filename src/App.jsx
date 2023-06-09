@@ -15,7 +15,7 @@ function App() {
   // contains array of pokemon objects with name and image
   const [pokemonList, setPokemonList] = useState([]);
   // number of cards to render
-  const [cardCount, setCardCount] = useState(24);
+  const [cardCount, setCardCount] = useState(4);
 
   // score
   const [score, setScore] = useState(0);
