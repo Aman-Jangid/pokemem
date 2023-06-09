@@ -151,7 +151,6 @@ function App() {
     setHighScore(localStorage.getItem('highscore'));
     setLevel(1);
     setIsGameOver(false);
-    // setPokemonList([]);
 
     const from = random();
     getPokemonData(from);

@@ -29,8 +29,8 @@
   align-items: center;
   gap: 1rem;
 
-  min-width: calc(90vw);
-  min-height: calc(80vh);
+  width: calc(90vw);
+  height: calc(80vh);
   border-radius: 0.5rem;
   background: yellowgreen;
 
@@ -227,4 +227,49 @@
 .playagain:hover {
   background: rgb(100, 135, 30);
   color: #fff;
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --header-height: 4rem;
+    --min-card-width: 8rem;
+    --max-card-width: 8rem;
+
+    font-size: 10px;
+  }
+
+  .header {
+    height: 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: repeat(3, 50px);
+  }
+
+  .logo {
+    grid-column: 1;
+    grid-row: 1;
+    height: 50px;
+    margin-left: 10px;
+    justify-self: start;
+  }
+
+  .level {
+    justify-self: end;
+    margin-right: 10px;
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .scoreboard {
+    margin-bottom: 10px;
+    align-self: center;
+
+    grid-column: 1/-1;
+    grid-row: 2;
+  }
+
+  .container {
+    background-color: lightgreen;
+    width: 95vw;
+  }
 }
