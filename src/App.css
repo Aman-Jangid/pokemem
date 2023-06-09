@@ -1,7 +1,10 @@
 :root {
   --header-height: 4.5rem;
   --min-card-width: 16rem;
-  --max-card-width: 20rem;
+  --max-card-height: 20rem;
+
+  --container-width: 90vw;
+  --container-height: 80vh;
 
   font-size: 10px;
 }
@@ -29,8 +32,8 @@
   align-items: center;
   gap: 1rem;
 
-  width: calc(90vw);
-  height: calc(80vh);
+  min-width: calc(90vw);
+  min-height: calc(80vh);
   border-radius: 0.5rem;
   background: yellowgreen;
 
@@ -89,7 +92,7 @@
 }
 
 .card img {
-  max-width: 16rem;
+  width: 100%;
 }
 
 .card label {
@@ -228,7 +231,6 @@
   background: rgb(100, 135, 30);
   color: #fff;
 }
-
 @media screen and (max-width: 480px) {
   :root {
     --header-height: 4rem;
@@ -275,8 +277,9 @@
   }
 
   .card {
-    height: calc((var(--mobile-height) / 100) * 60);
-    width: calc((var(--mobile-width) / 100) * 70);
+    flex: 0 0 auto;
+    width: calc(13rem / var(--card-count) + var(--max-card-width));
+    height: calc(15rem / var(--card-count) + 10rem);
   }
 
   .card img {
