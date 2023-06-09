@@ -261,7 +261,7 @@
   }
 
   .scoreboard {
-    margin-bottom: 10px;
+    width: 80vw;
     align-self: center;
 
     grid-column: 1/-1;
@@ -271,5 +271,15 @@
   .container {
     background-color: lightgreen;
     width: 95vw;
+    margin-top: 20px;
+  }
+
+  .card {
+    height: calc((var(--mobile-height) / 100) * 60);
+    width: calc((var(--mobile-width) / 100) * 70);
+  }
+
+  .card img {
+    width: 95%;
   }
 }
