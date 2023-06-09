@@ -26,7 +26,7 @@ function App() {
       : score
   );
   const [level, setLevel] = useState(1);
-  const [isGameOver, setIsGameOver] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(true);
 
   const [loading, setLoading] = useState(true);
   // generates a random number every run
