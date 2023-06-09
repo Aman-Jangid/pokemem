@@ -34,9 +34,10 @@ body {
   align-content: center;
   align-items: center;
   gap: 1rem;
+  padding: 10px;
 
-  min-width: calc(90vw);
-  min-height: calc(80vh);
+  min-width: 90vw;
+  height: 80vh;
   border-radius: 0.5rem;
   background: yellowgreen;
 
@@ -251,6 +252,7 @@ body {
   .App {
     display: grid;
     grid-template-rows: 50px auto;
+    height: max-content;
   }
 
   .header {
@@ -264,14 +266,13 @@ body {
     font-size: 0.94rem;
     background-color: lightgreen;
     width: 95lvw;
-    /* height: 70lvh !important; */
     height: max-content !important;
     margin-top: 60px;
 
     justify-items: center;
     align-content: center;
 
-    padding: 5px;
+    padding: 10px 5px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(6rem, auto));
     column-gap: 5px;
