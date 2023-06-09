@@ -257,6 +257,8 @@ body {
 
   .header {
     height: 50px;
+    width: 100vw !important;
+
     display: grid;
     grid-template-columns: repeat(2, 50%);
     grid-template-rows: repeat(3, 50px);
@@ -265,7 +267,7 @@ body {
   .container {
     font-size: 0.94rem;
     background-color: lightgreen;
-    width: 95lvw;
+    width: 90lvw;
     height: max-content !important;
     margin-top: 60px;
 
@@ -274,16 +276,13 @@ body {
 
     padding: 10px 5px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(6rem, auto));
+    grid-template-columns: repeat(auto-fit, minmax(5.5rem, auto));
     column-gap: 5px;
     row-gap: 12px;
-    max-width: 95lvw;
+    max-width: 93lvw;
   }
 
   .loading {
-    grid-column: 3;
-    grid-row: 3;
-
     justify-self: center;
     align-self: center;
   }
