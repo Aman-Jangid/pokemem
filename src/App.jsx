@@ -12,13 +12,24 @@ import GameOver from './components/GameOver';
 import useSound from 'use-sound';
 
 function App() {
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
   // contains array of pokemon objects with name and image
   const [pokemonList, setPokemonList] = useState([]);
   // number of cards to render
   const [cardCount, setCardCount] = useState(4);
+
+  useEffect(() => {
+    if (isMobile) {
+      setCardCount(1);
+    } else {
+      setIsGameOver(true);
+    }
+  }, []);
+
   // score
   const [score, setScore] = useState(0);
-  // get highScore from localStorage**************************
+  // get highScore from localStorage
   const [highScore, setHighScore] = useState(
     localStorage.getItem('highscore')
       ? localStorage.getItem('highscore')
